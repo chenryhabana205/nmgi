@@ -58,10 +58,10 @@ RUN apt-get update && apt-get install -y mosquitto mosquitto-clients influxdb
 
 #grafana
 
-# RUN wget https://dl.grafana.com/oss/release/grafana_6.3.5_amd64.deb
-# RUN dpkg -i grafana_6.3.5_amd64.deb
-COPY grafana/grafana_6.3.5_amd64.deb /root/
-RUN dpkg -i /root/grafana_6.3.5_amd64.deb
+RUN wget https://dl.grafana.com/oss/release/grafana_6.3.5_amd64.deb
+RUN dpkg -i grafana_6.3.5_amd64.deb
+#COPY grafana/grafana_6.3.5_amd64.deb /root/
+#RUN dpkg -i /root/grafana_6.3.5_amd64.deb
 
 # RUN apt-get clean autoclean \
 # 	&& apt-get autoremove --yes \
