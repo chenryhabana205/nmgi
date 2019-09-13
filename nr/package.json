@@ -52,7 +52,8 @@
         "node-red-node-suncalc": "*",
         "node-red-node-ui-list": "^0.2.2",
         "node-red-node-ui-table": "^0.1.5",
-        "ubidots-nodered": "^1.1.1"
+        "ubidots-nodered": "^1.1.1",
+        "set-value": ">=2.0.1"
     },
     "engines": {
         "node": "8.*.*"
