@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nmgi:
-    image: nmgi:latest
+    image: final:latest
     # privileged added so usb drive can be mounted.
     privileged: true
     ports:

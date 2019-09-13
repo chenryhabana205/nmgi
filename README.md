@@ -1,6 +1,10 @@
 
 Escribir introduccion y revisar todo lo que se puso abajo, luego pasar todo a markdown
 
+En nr :
+packagestoadd tiene los nodos que aun no sehan probado.
+removed tiene los nodos que dieron algun problema
+
 
 - Mosquitto
  Aqui solo acotar que si queremos exportar la configuracion de mosquitto mientras se descubre porque vacia la carpeta hay que copiar en la carpeta donde se exporte el contenifo de la carpeta config de este proyecto

@@ -58,10 +58,10 @@ RUN apt-get update && apt-get install -y mosquitto mosquitto-clients influxdb
 
 #grafana
 
-RUN wget https://dl.grafana.com/oss/release/grafana_6.3.5_amd64.deb
-RUN dpkg -i grafana_6.3.5_amd64.deb
-# COPY grafana/grafana_6.3.5_amd64.deb /root/
-# RUN dpkg -i /root/grafana_6.3.5_amd64.deb
+# RUN wget https://dl.grafana.com/oss/release/grafana_6.3.5_amd64.deb
+# RUN dpkg -i grafana_6.3.5_amd64.deb
+COPY grafana/grafana_6.3.5_amd64.deb /root/
+RUN dpkg -i /root/grafana_6.3.5_amd64.deb
 
 # RUN apt-get clean autoclean \
 # 	&& apt-get autoremove --yes \
@@ -135,7 +135,7 @@ RUN chmod 7777 /root/run.sh
 #CMD ["run.sh"]
 
 
-VOLUME ["/mqtt", "/nrdata", "/var/lib/grafana", "/var/lib/influxdb/"]
+VOLUME ["/mqtt", "/data", "/var/lib/grafana", "/var/lib/influxdb/"]
 
 
 # ADD docker-entrypoint.sh /usr/bin/
@@ -145,3 +145,4 @@ VOLUME ["/mqtt", "/nrdata", "/var/lib/grafana", "/var/lib/influxdb/"]
 CMD ["/root/run.sh"]
 
 #docker exec -it final_nmgi1 bash
+#docker build --rm -f "final/Dockerfile" -t nmgi:latest final

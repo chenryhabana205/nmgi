@@ -1,2 +1,4 @@
 data/
 grafana/grafana_6.3.5_amd64.deb
+nr/node_modules
+
