@@ -20,15 +20,15 @@ echo "Building ${_docker_repo}:${_nmgi_version}"
 # 	--tag "${_docker_repo}:${_nmgi_version}" \
 # 	--no-cache=true .
 
-# docker build \
-# 	--tag "${_docker_repo}:${_nmgi_version}" .
+docker build \
+	--tag "${_docker_repo}:${_nmgi_version}" .
 
-# # Tag as 'latest' for official release; otherwise tag as grafana/grafana:master
-# if echo "$_nmgi_tag" | grep -q "^v"; then
-# 	docker tag "${_docker_repo}:${_nmgi_version}" "${_docker_repo}:latest"
-# else
-# 	docker tag "${_docker_repo}:${_nmgi_version}" "nmgi:master"
-# fi
+# Tag as 'latest' for official release; otherwise tag as grafana/grafana:master
+if echo "$_nmgi_tag" | grep -q "^v"; then
+	docker tag "${_docker_repo}:${_nmgi_version}" "${_docker_repo}:latest"
+else
+	docker tag "${_docker_repo}:${_nmgi_version}" "nmgi:master"
+fi
 
 echo "Building docker composer file"
 
