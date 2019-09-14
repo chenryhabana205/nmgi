@@ -32,20 +32,20 @@ fi
 
 echo "Building docker composer file"
 
-echo "version: '3'
-
+echo "
+version: '3'
 services:
   nmgi:
     image: ${_docker_repo}:${_nmgi_version}
     # privileged added so usb drive can be mounted.
     privileged: true
     ports:
-    - \"1880:1880\"
-    - \"1883:1883\"
-    - \"9002:9002\"
-    - \"3000:3000\"
-    - \"8083:8083\"
-    - \"8086:8086\"
+      - \"1880:1880\"
+      - \"1883:1883\"
+      - \"9002:9002\"
+      - \"3000:3000\"
+      - \"8083:8083\"
+      - \"8086:8086\"
     environment:
       TOTHER2: value
       GF_INSTALL_PLUGINS: null
@@ -57,6 +57,6 @@ services:
       - ./data/nrdata:/data
       - ./data/grafana:/var/lib/grafana
       - ./data/influxdb:/var/lib/influxdb
-	  " > docker-compose.yml
+    " > docker-compose.yml
 
 echo "Complete ${_docker_repo}:${_nmgi_version}"
