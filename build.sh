@@ -20,14 +20,43 @@ echo "Building ${_docker_repo}:${_nmgi_version}"
 # 	--tag "${_docker_repo}:${_nmgi_version}" \
 # 	--no-cache=true .
 
-docker build \
-	--tag "${_docker_repo}:${_nmgi_version}" .
+# docker build \
+# 	--tag "${_docker_repo}:${_nmgi_version}" .
 
-# Tag as 'latest' for official release; otherwise tag as grafana/grafana:master
-if echo "$_nmgi_tag" | grep -q "^v"; then
-	docker tag "${_docker_repo}:${_nmgi_version}" "${_docker_repo}:latest"
-else
-	docker tag "${_docker_repo}:${_nmgi_version}" "nmgi:master"
-fi
+# # Tag as 'latest' for official release; otherwise tag as grafana/grafana:master
+# if echo "$_nmgi_tag" | grep -q "^v"; then
+# 	docker tag "${_docker_repo}:${_nmgi_version}" "${_docker_repo}:latest"
+# else
+# 	docker tag "${_docker_repo}:${_nmgi_version}" "nmgi:master"
+# fi
+
+echo "Building docker composer file"
+
+echo "version: '3'
+
+services:
+  nmgi:
+    image: ${_docker_repo}:${_nmgi_version}
+    # privileged added so usb drive can be mounted.
+    privileged: true
+    ports:
+    - \"1880:1880\"
+    - \"1883:1883\"
+    - \"9002:9002\"
+    - \"3000:3000\"
+    - \"8083:8083\"
+    - \"8086:8086\"
+    environment:
+      TOTHER2: value
+      GF_INSTALL_PLUGINS: null
+      # GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-piechart-panel,grafana-simple-json-datasource  1.2.3
+    volumes:
+      # - ./data/mqtt:/mqtt/
+      # - ./data/mqtt/data:/mqtt/data
+      # - ./data/mqtt/log:/mqtt/log
+      - ./data/nrdata:/data
+      - ./data/grafana:/var/lib/grafana
+      - ./data/influxdb:/var/lib/influxdb
+	  " > docker-compose.yml
 
 echo "Complete ${_docker_repo}:${_nmgi_version}"
