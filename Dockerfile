@@ -2,6 +2,9 @@ ARG NODE_VERSION=8
 # nodered stage
 FROM node:${NODE_VERSION}
 
+
+
+
 # Home directory for Node-RED application source code.
 RUN mkdir -p /usr/src/node-red
 
