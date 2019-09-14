@@ -128,7 +128,7 @@ RUN /root/preplugins.sh
 
 ENV TEST=other24
 
-COPY run.sh /root/
+COPY docker/run.sh /root/
 RUN chmod 7777 /root/run.sh
 
 # CMD ["npm", "start", "--", "--userDir", "/nrdata"]
