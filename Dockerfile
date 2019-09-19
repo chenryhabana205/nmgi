@@ -63,8 +63,8 @@ RUN apt-get update && apt-get install -y mosquitto mosquitto-clients influxdb
 
 RUN wget https://dl.grafana.com/oss/release/grafana_6.3.5_amd64.deb
 RUN dpkg -i grafana_6.3.5_amd64.deb
-#COPY grafana/grafana_6.3.5_amd64.deb /root/
-#RUN dpkg -i /root/grafana_6.3.5_amd64.deb
+# COPY grafana/grafana_6.3.5_amd64.deb /root/
+# RUN dpkg -i /root/grafana_6.3.5_amd64.deb
 
 # RUN apt-get clean autoclean \
 # 	&& apt-get autoremove --yes \
@@ -100,7 +100,7 @@ RUN chown -R mosquitto:mosquitto /mqtt
 # VOLUME ["/mqtt/", "/nrdata"]
 
 # User configuration directory volume
-EXPOSE 1880 1883 9002 3000 8083 8086
+EXPOSE 1880 1883 9002 3000 8083 8086 8883
 
 # Environment variable holding file path for flows configuration
 ENV FLOWS=flows.json
@@ -137,8 +137,28 @@ RUN chmod 7777 /root/run.sh
 # CMD ["npm", "start", "--", "--userDir", "/nrdata"]
 #CMD ["run.sh"]
 
+#zona de generacion de certificados por defecto
+RUN mkdir /mqtt/certs
+COPY mosquitto/generate-CA.sh /root
+RUN chmod 7777 /root/generate-CA.sh
+ENV TEST3=other1-
+#buscar otro destino mejor para este fichero
+RUN mkdir /root/mosquittoextras
+COPY mosquitto/extraconf /root/mosquittoextras
+# RUN chown -R node-red:node-red /mqtt
+RUN chown -R mosquitto:mosquitto /root/mosquittoextras
 
-VOLUME ["/mqtt", "/data", "/var/lib/grafana", "/var/lib/influxdb/"]
+# Other env if needed
+#	IPLIST="172.13.14.15 192.168.1.1"
+#	HOSTLIST="a.example.com b.example.com"
+ENV TARGET=/mqtt/certs/ \
+    CERTCA=ca \
+    CERTCERT=default \
+    CERTKEY=default
+RUN /root/generate-CA.sh default
+
+
+VOLUME ["/mqtt", "/data", "/var/lib/grafana", "/var/lib/influxdb/", "/mqtt/certs"], 
 
 
 # ADD docker-entrypoint.sh /usr/bin/

@@ -15,6 +15,8 @@ services:
     environment:
       TOTHER2: value
       GF_INSTALL_PLUGINS: null
+      # MOSQUITTOCA: null
+      # CA_ORG: ArdComunityCU
       # GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-piechart-panel,grafana-simple-json-datasource  1.2.3
     volumes:
       # - ./data/mqtt:/mqtt/

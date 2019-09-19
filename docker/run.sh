@@ -87,6 +87,15 @@ service influxdb stop
 
 influxd -config /root/influxdb.conf &
 
+#si quieren ssl necesito copiar el fichero y darle permisos al user mosquito para que lo lea antes de inciarlo
+
+# if [ ! -z "${MOSQUITTOCA}" ]; then
+if [ $MOSQUITTOCA = 1 ]; then
+ echo "Ejecutando elementos necsarios para poder usar ssl en mosquitto, ojo aqui faltan definir algunas cosas para que todo sea configurable"
+ cp -r /root/mosquittoextras/* /mqtt/config/conf.d/
+ chown -R mosquitto:mosquitto /mqtt/config/conf.d/
+fi
+
 # ls /mqtt/config
 /usr/sbin/mosquitto -c /mqtt/config/mosquitto.conf -d
 
