@@ -2,7 +2,7 @@
 version: '3'
 services:
   nmgi:
-    image: chenryhabana205/nmgi:1
+    image: nmgi-dev:1-slim
     # privileged added so usb drive can be mounted.
     privileged: true
     ports:

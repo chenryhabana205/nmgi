@@ -9,32 +9,26 @@ if echo "$_nmgi_tag" | grep -q "^v"; then
 	_docker_repo=${2:-$_repo/nmgi}
 else
 	_nmgi_version=$_nmgi_tag
-	_docker_repo=${2:-nmgi-dev}
+	_docker_repo=${2:-nmgi-rpi-dev}
 fi
 
 
-echo "Building ${_docker_repo}:${_nmgi_version}"
+echo "Building ${_docker_repo}:${_nmgi_version}-rpi"
 
 #run from scrash
 # docker build \
-# 	--tag "${_docker_repo}:${_nmgi_version}" \
+# 	--tag "${_docker_repo}:${_nmgi_version}-rpi" \
 # 	--no-cache=true .
 
 
-docker build -f docker/latest/Dockerfile \
-	--tag "${_docker_repo}:${_nmgi_version}" .
+docker build -f docker/rpi/Dockerfile \
+	--tag "${_docker_repo}:${_nmgi_version}-rpi" .
 
 if [ $? -ne 0 ]; then
     echo "ERROR: Docker build failed."
     exit 1
 fi
 
-# Tag as 'latest' for official release; otherwise tag as grafana/grafana:master
-if echo "$_nmgi_tag" | grep -q "^v"; then
-	docker tag "${_docker_repo}:${_nmgi_version}" "${_docker_repo}:latest"
-else
-	docker tag "${_docker_repo}:${_nmgi_version}" "nmgi:master"
-fi
 
 echo "Building docker composer file"
 
@@ -42,7 +36,7 @@ echo "
 version: '3'
 services:
   nmgi:
-    image: ${_docker_repo}:${_nmgi_version}
+    image: ${_docker_repo}:${_nmgi_version}-rpi
     # privileged added so usb drive can be mounted.
     privileged: true
     ports:
@@ -65,6 +59,6 @@ services:
       - ./data/nrdata:/data
       - ./data/grafana:/var/lib/grafana
       - ./data/influxdb:/var/lib/influxdb
-    " > docker-compose.yml
+    " > docker-compose-rpi.yml
 
-echo "Complete ${_docker_repo}:${_nmgi_version}"
+echo "Complete ${_docker_repo}:${_nmgi_version}-rpi"

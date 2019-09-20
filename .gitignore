@@ -1,4 +1,5 @@
 data/
+grafana/grafana_6.3.5_arm64.deb
 grafana/grafana_6.3.5_amd64.deb
 nr/node_modules
 ./docker-compose.yml
