@@ -43,7 +43,7 @@
         "node-red-contrib-usb": "^1.0.0",
         "node-red-contrib-web-worldmap": "^2.1.0",
         "node-red-contrib-websocket": "^0.1.0",
-        "node-red-dashboard": "^2.16.2",
+        "node-red-dashboard": "^2.17.0",
         "node-red-node-base64": "*",
         "node-red-node-markdown": "^0.1.2",
         "node-red-node-msgpack": "*",
