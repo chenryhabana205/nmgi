@@ -24,7 +24,7 @@
         }
     ],
     "dependencies": {
-        "set-value": ">=2.0.1",
+        "set-value": ">=4.0.1",
         "node-red": "0.20.8",
         "node-red-contrib-dashboard-bar-chart-data": "^0.9.5",
         "node-red-contrib-http-proxy": "^1.0.0",
