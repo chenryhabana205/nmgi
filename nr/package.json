@@ -32,7 +32,7 @@
         "node-red-contrib-ip": "0.0.6",
         "node-red-contrib-kodi": "^0.2.8",
         "node-red-contrib-mikrotik3": "^0.2.22",
-        "node-red-contrib-modbus": "^4.1.3",
+        "node-red-contrib-modbus": "^5.23.2",
         "node-red-contrib-moment2": "^1.0.5",
         "node-red-contrib-openhab-v2": "^1.4.1",
         "node-red-contrib-pid": "^1.1.5",
